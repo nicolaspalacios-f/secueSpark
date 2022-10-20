@@ -8,7 +8,7 @@ public class ByeWorld {
 
         secure(getKeyStore(), getKeyStorePassword(), null, null);
         URLReader.loadTrustStore(getTrustStore());
-        get("/bye", (req, res) -> getOwner() + " World");
+        get("/response", (req, res) -> getOwner() + " World");
         get("/remote", (req, res) -> URLReader.readURL(getLink()));
     }
 
@@ -16,7 +16,7 @@ public class ByeWorld {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 5001;
+        return 5000;
     }
 
     static String getKeyStorePassword() {
@@ -44,20 +44,20 @@ public class ByeWorld {
         if (System.getenv("TRUSTSTORE") != null) {
             return System.getenv("TRUSTSTORE");
         }
-        return "./keystores/ecikeystore.p12";
+        return "keystores/ecikeystore.p12";
     }
 
     static String getLink() {
         if (System.getenv("LINK") != null) {
             return System.getenv("LINK");
         }
-        return "https://localhost:5000/hello";
+        return "https://localhost:5000/response";
     }
 
     static String getOwner() {
         if (System.getenv("OWNER") != null) {
             return System.getenv("OWNER");
         }
-        return "no";
+        return "bye";
     }
 }
